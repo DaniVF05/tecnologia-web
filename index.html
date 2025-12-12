@@ -3,625 +3,1402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turismo en Santa Cruz - Descubre la Joya de Oriente</title>
+    <title>Portafolio – Tecnología Web I</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Variables y Estilos Generales (Dark Mode) */
+        :root{
+            --bg:#0d1117;
+            --sec:#161b22;
+            --text:#e6e6e6;
+            --sub:#9ca3af;
+            --accent:#d9534f;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+        *{margin:0;padding:0;box-sizing:border-box;}
+
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family:'Poppins', sans-serif;
+            padding:25px;
         }
 
-        /* Header y Navegación */
-        header {
-            background: linear-gradient(135deg, #2c5530 0%, #4a7c4e 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        /* Header */
+        header{
+            background:var(--sec);
+            padding:20px;
+            border-radius:12px;
+            margin-bottom:25px;
+            border:1px solid #222;
+        }
+        header h1{
+            font-size:24px;
+            margin-bottom:5px;
+        }
+        header h2{
+            font-size:18px;
+            color:var(--sub);
         }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
+        /* Navegación */
+        .nav{
+            display:flex;
+            justify-content:center;
+            gap:18px;
+            margin:25px 0;
+            flex-wrap:wrap;
+        }
+        .btn{
+            padding:10px 18px;
+            background:var(--accent);
+            border:none;
+            border-radius:10px;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+        .btn:hover{
+            background:#b84340;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+        /* Secciones y iframes */
+        .section{
+            display:none;
+        }
+        .active{
+            display:block;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: #f4a460;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 70px;
-            height: 600px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c4e" width="1200" height="600"/><path fill="%233d6640" d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z"/><circle fill="%23f4a460" cx="200" cy="150" r="60" opacity="0.3"/><circle fill="%23f4a460" cx="900" cy="200" r="80" opacity="0.2"/></svg>');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #f4a460;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            background: #e8944d;
-        }
-
-        /* Secciones */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #2c5530;
-            text-align: center;
-        }
-
-        /* Ubicación */
-        .ubicacion-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .mapa-placeholder {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            height: 400px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #2c5530;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .info-box {
-            background: #f9f9f9;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid #4a7c4e;
-        }
-
-        .info-box h3 {
-            color: #2c5530;
-            margin-bottom: 1rem;
-        }
-
-        .info-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-box li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .info-box li:last-child {
-            border-bottom: none;
-        }
-
-        /* Destinos */
-        .destinos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .destino-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .destino-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .destino-img {
-            height: 200px;
-            background: linear-gradient(135deg, #4a7c4e 0%, #6b9b6e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .destino-content {
-            padding: 1.5rem;
-        }
-
-        .destino-content h3 {
-            color: #2c5530;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Gastronomía */
-        .gastronomia-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .plato-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .plato-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #f4a460 0%, #e8944d 100%);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .plato-card h3 {
-            color: #2c5530;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Historia */
-        .historia-content {
-            background: linear-gradient(135deg, #f9f9f9 0%, #e8f5e9 100%);
-            padding: 3rem;
-            border-radius: 10px;
-            border-left: 5px solid #4a7c4e;
-        }
-
-        .timeline {
-            margin-top: 2rem;
-        }
-
-        .timeline-item {
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-            border-left: 3px solid #f4a460;
-        }
-
-        .timeline-item h3 {
-            color: #2c5530;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contacto */
-        .contacto-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        input, textarea {
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #4a7c4e;
-        }
-
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        button[type="submit"] {
-            padding: 1rem;
-            background: #4a7c4e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background: #3d6640;
-        }
-
-        .info-contacto {
-            background: #f9f9f9;
-            padding: 2rem;
-            border-radius: 10px;
-        }
-
-        .info-contacto h3 {
-            color: #2c5530;
-            margin-bottom: 1rem;
-        }
-
-        .contacto-item {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 5px;
+        iframe{
+            width:100%;
+            min-height:900px;
+            border:none;
+            background:white;
+            border-radius:10px;
         }
 
         /* Footer */
-        footer {
-            background: #2c5530;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #2c5530;
-                flex-direction: column;
-                padding: 1rem;
-                gap: 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                padding: 1rem 0;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .ubicacion-content,
-            .contacto-content {
-                grid-template-columns: 1fr;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
+        footer{
+            margin-top:35px;
+            text-align:center;
+            color:var(--sub);
+            font-size:14px;
         }
     </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">Santa Cruz Turismo</div>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#ubicacion">Ubicación</a></li>
-                <li><a href="#destinos">Destinos</a></li>
-                <li><a href="#gastronomia">Gastronomía</a></li>
-                <li><a href="#historia">Historia</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Descubre Santa Cruz</h1>
-            <p>La joya del oriente boliviano te espera con sus paisajes naturales, cultura vibrante y hospitalidad sin igual</p>
-            <a href="#destinos" class="cta-button">Explorar Destinos</a>
-        </div>
-    </section>
-
-    <section id="ubicacion">
-        <h2>Ubicación y Acceso</h2>
-        <div class="ubicacion-content">
-            <div class="info-box">
-                <h3>Cómo Llegar</h3>
-                <ul>
-                    <li><strong>Aeropuerto:</strong> Viru Viru Internacional (VVI)</li>
-                    <li><strong>Vuelos:</strong> Conexiones nacionales e internacionales diarias</li>
-                    <li><strong>Terminal Terrestre:</strong> Bimodal de Santa Cruz</li>
-                    <li><strong>Carreteras:</strong> Red vial conectada con todo el país</li>
-                </ul>
-                <br>
-                <h3>Datos Importantes</h3>
-                <ul>
-                    <li><strong>Altitud:</strong> 416 m.s.n.m.</li>
-                    <li><strong>Clima:</strong> Tropical cálido y húmedo</li>
-                    <li><strong>Temperatura:</strong> 18°C - 33°C promedio</li>
-                    <li><strong>Población:</strong> Más de 2 millones de habitantes</li>
-                </ul>
-            </div>
-            <div class="mapa-placeholder">
-                Mapa Interactivo de Santa Cruz<br>
-                <small>Integración con Google Maps</small>
-            </div>
-        </div>
-    </section>
-
-    <section id="destinos">
-        <h2>Lugares Turísticos</h2>
-        <div class="destinos-grid">
-            <div class="destino-card">
-                <div class="destino-img">Parque Amboró</div>
-                <div class="destino-content">
-                    <h3>Parque Nacional Amboró</h3>
-                    <p>Una de las áreas protegidas con mayor biodiversidad del planeta. Hogar de cientos de especies de aves, mamíferos y plantas endémicas.</p>
-                </div>
-            </div>
-            <div class="destino-card">
-                <div class="destino-img">Lomas de Arena</div>
-                <div class="destino-content">
-                    <h3>Lomas de Arena</h3>
-                    <p>Dunas de arena blanca en medio del trópico. Un fenómeno natural único perfecto para sandboard y caminatas.</p>
-                </div>
-            </div>
-            <div class="destino-card">
-                <div class="destino-img">Misiones Jesuíticas</div>
-                <div class="destino-content">
-                    <h3>Misiones Jesuíticas</h3>
-                    <p>Patrimonio de la Humanidad UNESCO. Templos coloniales con arquitectura barroca mestiza y festivales de música renacentista.</p>
-                </div>
-            </div>
-            <div class="destino-card">
-                <div class="destino-img">Samaipata</div>
-                <div class="destino-content">
-                    <h3>El Fuerte de Samaipata</h3>
-                    <p>Centro ceremonial precolombino tallado en roca. Patrimonio Cultural de la Humanidad con vistas espectaculares.</p>
-                </div>
-            </div>
-            <div class="destino-card">
-                <div class="destino-img">Plaza 24 de Septiembre</div>
-                <div class="destino-content">
-                    <h3>Plaza 24 de Septiembre</h3>
-                    <p>Corazón histórico de la ciudad. Rodeada de la Catedral Metropolitana, edificios coloniales y vida urbana vibrante.</p>
-                </div>
-            </div>
-            <div class="destino-card">
-                <div class="destino-img">Biocentro Güembé</div>
-                <div class="destino-content">
-                    <h3>Biocentro Güembé</h3>
-                    <p>Resort ecológico con mariposario, orquideario, piscinas naturales y senderos en plena naturaleza tropical.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gastronomia">
-        <h2>Gastronomía Típica</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">La cocina cruceña es una fusión de sabores tradicionales con influencias de las culturas guaraní, chiquitana y española. Platos abundantes que reflejan la calidez de su gente.</p>
-        <div class="gastronomia-grid">
-            <div class="plato-card">
-                <div class="plato-icon">M</div>
-                <h3>Majadito</h3>
-                <p>Arroz con charque, plátano frito, yuca y huevo. El plato emblemático de Santa Cruz.</p>
-            </div>
-            <div class="plato-card">
-                <div class="plato-icon">P</div>
-                <h3>Patasca</h3>
-                <p>Sopa tradicional de maíz pelado con carne de cerdo. Ideal para días frescos.</p>
-            </div>
-            <div class="plato-card">
-                <div class="plato-icon">S</div>
-                <h3>Sopa de Maní</h3>
-                <p>Cremosa sopa a base de maní molido con carne y verduras. Sabor único e inconfundible.</p>
-            </div>
-            <div class="plato-card">
-                <div class="plato-icon">C</div>
-                <h3>Cuñapé</h3>
-                <p>Pan de queso tradicional de la región. Perfecto para el desayuno o la merienda.</p>
-            </div>
-            <div class="plato-card">
-                <div class="plato-icon">L</div>
-                <h3>Locro Carretero</h3>
-                <p>Guiso espeso de arroz, charque y queso. Plato contundente lleno de tradición.</p>
-            </div>
-            <div class="plato-card">
-                <div class="plato-icon">E</div>
-                <h3>Empanadas Cruceñas</h3>
-                <p>Empanadas de queso con azúcar espolvoreada. Dulces y saladas a la vez.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="historia">
-        <h2>Historia y Cultura</h2>
-        <div class="historia-content">
-            <p>Santa Cruz de la Sierra es una de las ciudades más antiguas de América del Sur, fundada en el siglo XVI. Su historia está marcada por la mezcla de culturas indígenas, la presencia jesuítica y el espíritu emprendedor de su gente.</p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h3>1561 - Fundación</h3>
-                    <p>Ñuflo de Chaves funda la ciudad de Santa Cruz de la Sierra en su ubicación original, en la región de San José de Chiquitos.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>1592 - Traslado</h3>
-                    <p>La ciudad es trasladada a su ubicación actual a orillas del río Piraí, buscando mejores condiciones geográficas.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Siglo XVII-XVIII - Misiones Jesuíticas</h3>
-                    <p>Establecimiento de las reducciones jesuíticas que dejaron un legado arquitectónico y cultural invaluable en la región de Chiquitania.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Siglo XX - Expansión</h3>
-                    <p>Santa Cruz experimenta un crecimiento acelerado, convirtiéndose en el motor económico de Bolivia gracias a la agricultura, ganadería e industria.</p>
-                </div>
-                <div class="timeline-item">
-                    <h3>Actualidad</h3>
-                    <p>Hoy es la ciudad más poblada de Bolivia, centro comercial, cultural y turístico de importancia nacional e internacional.</p>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 2rem; color: #2c5530;">Cultura Cruceña</h3>
-            <p style="margin-top: 1rem;">La cultura cruceña se caracteriza por su hospitalidad, música tradicional (taquirari, chovena), festividades coloridas como el Carnaval Cruceño, y la preservación de tradiciones como el uso de la tipoy (vestimenta tradicional femenina). La identidad regional se expresa en su gastronomía, folklore y sentido de comunidad.</p>
-        </div>
-    </section>
-
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <div class="contacto-content">
-            <form onsubmit="handleSubmit(event)">
-                <input type="text" placeholder="Nombre completo" required>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="tel" placeholder="Teléfono">
-                <textarea placeholder="Mensaje o consulta" required></textarea>
-                <button type="submit">Enviar Mensaje</button>
-            </form>
-            <div class="info-contacto">
-                <h3>Información de Contacto</h3>
-                <div class="contacto-item">
-                    <strong>Dirección:</strong><br>
-                    Plaza 24 de Septiembre<br>
-                    Santa Cruz de la Sierra, Bolivia
-                </div>
-                <div class="contacto-item">
-                    <strong>Teléfono:</strong><br>
-                    +591 3 123 4567
-                </div>
-                <div class="contacto-item">
-                    <strong>Email:</strong><br>
-                    info@turismocruz.bo
-                </div>
-                <div class="contacto-item">
-                    <strong>Horario de Atención:</strong><br>
-                    Lunes a Viernes: 8:00 - 18:00<br>
-                    Sábados: 9:00 - 13:00
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Turismo Santa Cruz - Bolivia. Todos los derechos reservados.</p>
-        <p>Descubre la belleza natural y cultural del oriente boliviano</p>
-    </footer>
 
     <script>
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
+        function showSection(id){
+            // 1. Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            // 2. Mostrar solo la sección con el ID dado
+            document.getElementById(id).classList.add('active');
         }
-
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Gracias por tu mensaje. Te contactaremos pronto.');
-            event.target.reset();
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Cerrar menú móvil si está abierto
-                    document.getElementById('navLinks').classList.remove('active');
-                }
-            });
-        });
     </script>
+
+</head>
+<body onload="showSection('p1')">
+
+    <header>
+        <h1>Tecnología Web I</h1>
+        <h2>Daniel F. Valencia F.</h2>
+        <h2>Universidad Privada Domingo Savio</h2>
+    </header>
+
+    <div class="nav">
+        <button class="btn" onclick="showSection('p1')">Práctica 1</button>
+        <button class="btn" onclick="showSection('p2')">Práctica 2</button>
+        <button class="btn" onclick="showSection('css')">CSS</button>
+        <button class="btn" onclick="showSection('proyecto')">Proyecto Final</button>
+    </div>
+
+    <div id="p1" class="section active">
+        <iframe srcdoc="
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang='es'&gt;
+            &lt;head&gt;
+                &lt;meta charset='UTF-8'&gt;
+                &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;
+                &lt;title&gt;Práctica 1 - Hola Mundo&lt;/title&gt;
+                &lt;style&gt;
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #e6f7ff;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        min-height: 100vh;
+                        color: #1f3a68;
+                    }
+                    .container {
+                        background-color: #ffffff;
+                        padding: 45px 70px;
+                        border-radius: 10px;
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+                        text-align: center;
+                        max-width: 550px;
+                        width: 90%;
+                        transition: transform 0.3s ease-in-out;
+                    }
+                    .container:hover {
+                        transform: translateY(-5px);
+                    }
+                    h1 {
+                        color: #007bff;
+                        font-size: 3em;
+                        margin-bottom: 0.2em;
+                    }
+                    p {
+                        color: #555;
+                        line-height: 1.6;
+                        font-size: 1.1em;
+                    }
+                    .js-message {
+                        margin-top: 25px;
+                        padding: 10px;
+                        background-color: #ffe0b2;
+                        color: #e65100;
+                        border-radius: 5px;
+                        font-weight: bold;
+                    }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;div class='container'&gt;
+                    &lt;h1&gt;¡Hola Mundo!&lt;/h1&gt;
+                    &lt;p&gt;Esta es la página principal de tu servidor web simple.&lt;/p&gt;
+                    &lt;p&gt;El diseño CSS se ve bien, con un estilo limpio y moderno.&lt;/p&gt;
+                    &lt;div id='js-output' class='js-message'&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;script&gt;
+                    function mostrarMensaje() {
+                        let mensaje = 'El código JavaScript se ha ejecutado.';
+                        document.getElementById('js-output').textContent = mensaje;
+                    }
+                    mostrarMensaje();
+                &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        "></iframe>
+    </div>
+
+    <div id="p2" class="section">
+        <iframe srcdoc="
+            &lt;!doctype html&gt;
+            &lt;html lang='es'&gt;
+            &lt;head&gt;
+            &lt;meta charset='utf-8' /&gt;
+            &lt;meta name='viewport' content='width=device-width,initial-scale=1' /&gt;
+            &lt;title&gt;Actividades JavaScript - Informe&lt;/title&gt;
+            &lt;style&gt;
+              :root{
+                --bg1: #0f172a;
+                --bg2: #07102a;
+                --card: rgba(255,255,255,0.04);
+                --glass: rgba(255,255,255,0.03);
+                --accent: #0ea5a4;
+                --muted: #94a3b8;
+                --card-radius: 14px;
+                --maxw: 1100px;
+                --pad: 18px;
+                font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+              }
+              html,body{
+                height:100%;
+                margin:0;
+                background: linear-gradient(180deg,#07102a 0%, #0f172a 60%);
+                color:#e6eef6;
+              }
+              .container{
+                max-width:var(--maxw);
+                margin:28px auto;
+                padding:24px;
+                display:grid;
+                gap:18px;
+              }
+              header{
+                display:flex;
+                gap:18px;
+                align-items:center;
+                justify-content:space-between;
+              }
+              .brand{
+                display:flex;
+                gap:14px;
+                align-items:center;
+              }
+              .logo {
+                width:56px;
+                height:56px;
+                border-radius:12px;
+                background:linear-gradient(135deg, rgba(14,165,164,1) 0%, rgba(14,110,240,0.85) 100%);
+                display:grid;
+                place-items:center;
+                box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+                font-weight:700;
+                color:white;
+                font-size:18px;
+              }
+              h1{ margin:0; font-size:20px; }
+              p.lead{ margin:0; color:var(--muted); font-size:13px; }
+              .top-actions{
+                display:flex;
+                gap:10px;
+                align-items:center;
+              }
+              input[type='url'], input[type='text'], input[type='number'], select {
+                background:var(--glass);
+                border:1px solid rgba(255,255,255,0.04);
+                color:inherit;
+                padding:10px 12px;
+                border-radius:10px;
+                outline:none;
+                min-width:220px;
+              }
+              button, .btn {
+                background: linear-gradient(90deg,var(--accent), #0891b2);
+                color: #021427;
+                border: none;
+                padding:10px 14px;
+                border-radius:10px;
+                font-weight:600;
+                cursor:pointer;
+                box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+              }
+              button.secondary {
+                background: transparent;
+                color: var(--muted);
+                border:1px solid rgba(255,255,255,0.04);
+                box-shadow:none;
+              }
+              .grid {
+                display:grid;
+                gap:14px;
+                grid-template-columns: repeat(2, 1fr);
+              }
+              .card{
+                background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+                border-radius: var(--card-radius);
+                padding: var(--pad);
+                box-shadow: 0 6px 20px rgba(2,6,23,0.45);
+                border: 1px solid rgba(255,255,255,0.03);
+              }
+              .card h2{
+                margin:0 0 8px 0;
+                font-size:16px;
+              }
+              label{ font-size:13px; color:var(--muted); display:block; margin-bottom:6px; }
+              small.help{ color:var(--muted); display:block; margin-top:8px; font-size:12px; }
+              .output{
+                margin-top:10px;
+                background: rgba(0,0,0,0.25);
+                padding:10px;
+                border-radius:8px;
+                min-height:42px;
+              }
+              .fullwidth{ grid-column: 1 / -1; }
+              ul.list {
+                margin:0;
+                padding-left:16px;
+                color:var(--muted);
+              }
+              footer {
+                color:var(--muted);
+                font-size:13px;
+                text-align:center;
+                margin-top:6px;
+              }
+              @media (max-width:900px){
+                .grid { grid-template-columns: 1fr; }
+                .top-actions { flex-direction:column; align-items:flex-end; }
+              }
+            &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;div class='container' id='contentToPrint'&gt;
+                &lt;header&gt;
+                  &lt;div class='brand'&gt;
+                    &lt;div class='logo'&gt;JS&lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;h1&gt;Actividades JavaScript — Informe&lt;/h1&gt;
+                      &lt;p class='lead'&gt;Ejercicios: clima, FizzBuzz, fecha, lugar turístico y hotel.&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+            
+                  &lt;div class='top-actions'&gt;
+                    &lt;input id='github' type='url' placeholder='Enlace GitHub / Portal de tareas (opcional)'/&gt;
+                    &lt;div style='display:flex;gap:8px;'&gt;
+                      &lt;input id='fileReport' type='file' accept='application/pdf'/&gt;
+                      &lt;button class='btn' id='btnPrint'&gt;Generar PDF&lt;/button&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/header&gt;
+            
+                &lt;main class='grid'&gt;
+            
+                  &lt;!-- EJERCICIO 1 --&gt;
+                  &lt;section class='card'&gt;
+                    &lt;h2&gt;1. Convertir temperatura → Clima&lt;/h2&gt;
+                    &lt;label for='tempInput'&gt;Temperatura (°C)&lt;/label&gt;
+                    &lt;div style='display:flex;gap:8px;'&gt;
+                      &lt;input id='tempInput' type='number' placeholder='Ej: 20' /&gt;
+                      &lt;button id='btnTemp' class='btn'&gt;Calcular clima&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class='output' id='tempOutput'&gt;Resultado: —&lt;/div&gt;
+                  &lt;/section&gt;
+            
+                  &lt;!-- EJERCICIO 2 --&gt;
+                  &lt;section class='card'&gt;
+                    &lt;h2&gt;2. Fizz-Buzz (1 → 100)&lt;/h2&gt;
+                    &lt;button id='btnFizz' class='btn'&gt;Generar&lt;/button&gt;
+                    &lt;button id='btnClearFizz' class='secondary'&gt;Limpiar&lt;/button&gt;
+                    &lt;div class='output' id='fizzOutput' style='max-height:220px;overflow:auto'&gt;&lt;/div&gt;
+                  &lt;/section&gt;
+            
+                  &lt;!-- EJERCICIO 3 --&gt;
+                  &lt;section class='card'&gt;
+                    &lt;h2&gt;3. Fecha actual&lt;/h2&gt;
+                    &lt;button id='btnFecha' class='btn'&gt;Mostrar fecha&lt;/button&gt;
+                    &lt;button id='btnCopiarFecha' class='secondary'&gt;Copiar&lt;/button&gt;
+                    &lt;div class='output' id='fechaOutput'&gt;—&lt;/div&gt;
+                  &lt;/section&gt;
+            
+                  &lt;!-- EJERCICIO 4 --&gt;
+                  &lt;section class='card fullwidth'&gt;
+                    &lt;h2&gt;4. Objeto lugarTuristico&lt;/h2&gt;
+                    &lt;div style='display:flex;gap:12px;flex-wrap:wrap;'&gt;
+                      &lt;div style='flex:1;min-width:220px'&gt;
+                        &lt;label&gt;Nombre&lt;/label&gt;
+                        &lt;input id='lt-nombre' type='text'/&gt;
+                        &lt;label style='margin-top:8px;'&gt;Ciudad&lt;/label&gt;
+                        &lt;input id='lt-ciudad' type='text'/&gt;
+                        &lt;label style='margin-top:8px;'&gt;Precio entrada&lt;/label&gt;
+                        &lt;input id='lt-precio' type='number' value='50'/&gt;
+                      &lt;/div&gt;
+                      &lt;div style='flex:1;min-width:220px'&gt;
+                        &lt;label&gt;Horario&lt;/label&gt;
+                        &lt;input id='lt-horario' type='text'/&gt;
+                        &lt;label style='margin-top:8px;'&gt;Añadir calificación&lt;/label&gt;
+                        &lt;div style='display:flex;gap:8px;'&gt;
+                          &lt;input id='lt-calificacion' type='number' min='1' max='5' value='5'/&gt;
+                          &lt;button id='btnAddCal' class='btn'&gt;Añadir&lt;/button&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+            
+                    &lt;div style='display:flex;gap:8px;margin-top:12px;'&gt;
+                      &lt;button id='btnCrearLT' class='btn'&gt;Crear/Actualizar&lt;/button&gt;
+                      &lt;button id='btnPromedio' class='secondary'&gt;Promedio&lt;/button&gt;
+                      &lt;button id='btnDescuento' class='secondary'&gt;Descuento 10%&lt;/button&gt;
+                    &lt;/div&gt;
+            
+                    &lt;div class='output' id='lugarOutput'&gt;Objeto: —&lt;/div&gt;
+                  &lt;/section&gt;
+            
+                  &lt;!-- EJERCICIO 5 --&gt;
+                  &lt;section class='card'&gt;
+                    &lt;h2&gt;5. Clase Hotel&lt;/h2&gt;
+                    &lt;div style='display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px'&gt;
+                      &lt;div style='flex:1;min-width:200px;'&gt;
+                        &lt;label&gt;Nombre&lt;/label&gt;
+                        &lt;input id='h-nombre' type='text'/&gt;
+                        &lt;label style='margin-top:8px;'&gt;Ciudad&lt;/label&gt;
+                        &lt;input id='h-ciudad' type='text'/&gt;
+                        &lt;label style='margin-top:8px;'&gt;Habitaciones&lt;/label&gt;
+                        &lt;input id='h-rooms' type='number' value='10' min='0'/&gt;
+                      &lt;/div&gt;
+            
+                      &lt;div style='display:flex;flex-direction:column;gap:8px;'&gt;
+                        &lt;button id='btnCrearHotel' class='btn'&gt;Crear hotel&lt;/button&gt;
+                        &lt;button id='btnInfoHotel' class='secondary'&gt;Info&lt;/button&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+            
+                    &lt;div style='display:flex;gap:8px;flex-wrap:wrap;'&gt;
+                      &lt;label&gt;Cantidad&lt;/label&gt;
+                      &lt;input id='h-cant' type='number' value='1' min='1' style='width:92px'/&gt;
+                      &lt;button id='btnReservar' class='btn'&gt;Reservar&lt;/button&gt;
+                      &lt;button id='btnLiberar' class='secondary'&gt;Liberar&lt;/button&gt;
+                    &lt;/div&gt;
+            
+                    &lt;div class='output' id='hotelOutput'&gt;Estado: —&lt;/div&gt;
+                  &lt;/section&gt;
+            
+                &lt;/main&gt;
+            
+                &lt;footer&gt;
+                  &lt;p&gt;Use 'Generar PDF' para guardar su informe.&lt;/p&gt;
+                &lt;/footer&gt;
+              &lt;/div&gt;
+            
+            &lt;script&gt;
+            
+            /////////////////////// EJERCICIO 1 ///////////////////////
+            
+            function climaDesdeCelsius(t){
+              const n = Number(t);
+              if (Number.isNaN(n)) return 'Entrada inválida';
+              if (n &gt;= -10 &amp;&amp; n &lt;= 15) return 'Frío';
+              if (n &gt;= 16 &amp;&amp; n &lt;= 25) return 'Templado';
+              if (n &gt;= 26 &amp;&amp; n &lt;= 40) return 'Calor';
+              return 'Fuera de rango';
+            }
+            
+            document.getElementById('btnTemp').addEventListener('click', ()=&gt;{
+              const v = document.getElementById('tempInput').value;
+              document.getElementById('tempOutput').innerText = `Resultado: ${climaDesdeCelsius(v)}`;
+            });
+            
+            /////////////////////// EJERCICIO 2 ///////////////////////
+            
+            function generarFizzBuzz(){
+              const items = [];
+              for(let i=1;i&lt;=100;i++){
+                const m3 = i%3===0, m5=i%5===0;
+                if (m3 &amp;&amp; m5) items.push(i + ' → FizzBuzz');
+                else if (m3) items.push(i + ' → Fizz');
+                else if (m5) items.push(i + ' → Buzz');
+              }
+              return items;
+            }
+            
+            document.getElementById('btnFizz').addEventListener('click', () =&gt; {
+              const list = generarFizzBuzz();
+              document.getElementById('fizzOutput').innerHTML =
+                '&lt;ul class=\'list\'&gt;' + list.map(s =&gt; `&lt;li&gt;${s}&lt;/li&gt;`).join('') + '&lt;/ul&gt;';
+            });
+            
+            document.getElementById('btnClearFizz').addEventListener('click', () =&gt; {
+              document.getElementById('fizzOutput').innerHTML = '';
+            });
+            
+            /////////////////////// EJERCICIO 3 ///////////////////////
+            
+            function fechaFormateadaES(d = new Date()){
+              const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+              const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+              return `${dias[d.getDay()]}, ${d.getDate()} de ${meses[d.getMonth()]} del ${d.getFullYear()}`;
+            }
+            
+            document.getElementById('btnFecha').addEventListener('click', ()=&gt;{
+              document.getElementById('fechaOutput').innerText = fechaFormateadaES();
+            });
+            
+            document.getElementById('btnCopiarFecha').addEventListener('click', async ()=&gt;{
+              const t = document.getElementById('fechaOutput').innerText;
+              try{
+                await navigator.clipboard.writeText(t);
+                alert('Copiado.');
+              }catch(e){ alert('No se pudo copiar.'); }
+            });
+            
+            /////////////////////// EJERCICIO 4 ///////////////////////
+            
+            let lugarTuristico = null;
+            
+            document.getElementById('btnAddCal').addEventListener('click', ()=&gt;{
+              if (!lugarTuristico) lugarTuristico = {nombre:'',ciudad:'',precioEntrada:0,horario:'',calificaciones:[]};
+              const c = Number(document.getElementById('lt-calificacion').value);
+              if (c&gt;=1 &amp;&amp; c&lt;=5) lugarTuristico.calificaciones.push(c);
+              mostrarLugar();
+            });
+            
+            document.getElementById('btnCrearLT').addEventListener('click', ()=&gt;{
+              lugarTuristico = {
+                nombre: document.getElementById('lt-nombre').value,
+                ciudad: document.getElementById('lt-ciudad').value,
+                precioEntrada: Number(document.getElementById('lt-precio').value),
+                horario: document.getElementById('lt-horario').value,
+                calificaciones: lugarTuristico ? lugarTuristico.calificaciones : []
+              };
+              mostrarLugar();
+            });
+            
+            document.getElementById('btnPromedio').addEventListener('click', ()=&gt;{
+              if (!lugarTuristico || lugarTuristico.calificaciones.length===0){
+                alert('No hay calificaciones');
+                return;
+              }
+              const p = lugarTuristico.calificaciones.reduce((a,b)=&gt;a+b,0)/lugarTuristico.calificaciones.length;
+              alert('Promedio: ' + p.toFixed(2));
+            });
+            
+            document.getElementById('btnDescuento').addEventListener('click', ()=&gt;{
+              if (!lugarTuristico) return;
+              lugarTuristico.precioEntrada *= 0.9;
+              mostrarLugar();
+            });
+            
+            function mostrarLugar(){
+              if (!lugarTuristico){
+                document.getElementById('lugarOutput').innerText = 'Objeto: —';
+                return;
+              }
+              document.getElementById('lugarOutput').innerHTML =
+                `Nombre: ${lugarTuristico.nombre}&lt;br&gt;`+
+                `Ciudad: ${lugarTuristico.ciudad}&lt;br&gt;`+
+                `Horario: ${lugarTuristico.horario}&lt;br&gt;`+
+                `Precio: Bs. ${lugarTuristico.precioEntrada}&lt;br&gt;`+
+                `Calificaciones: ${lugarTuristico.calificaciones.join(', ')}`;
+            }
+            
+            /////////////////////// EJERCICIO 5 ///////////////////////
+            
+            let hotel = null;
+            
+            class Hotel{
+              constructor(nombre, ciudad, habitacionesDisponibles){
+                this.nombre = nombre;
+                this.ciudad = ciudad;
+                this.habitacionesDisponibles = habitacionesDisponibles;
+              }
+              reservar(cantidad){
+                if (this.habitacionesDisponibles - cantidad &lt; 0){
+                  alert('No hay suficientes habitaciones');
+                  return;
+                }
+                this.habitacionesDisponibles -= cantidad;
+              }
+              liberar(cantidad){
+                this.habitacionesDisponibles += cantidad;
+              }
+              info(){
+                return `Hotel ${this.nombre} en ${this.ciudad}. Habitaciones disponibles: ${this.habitacionesDisponibles}`;
+              }
+            }
+            
+            document.getElementById('btnCrearHotel').addEventListener('click', ()=&gt;{
+              hotel = new Hotel(
+                document.getElementById('h-nombre').value,
+                document.getElementById('h-ciudad').value,
+                Number(document.getElementById('h-rooms').value)
+              );
+              mostrarHotel();
+            });
+            
+            document.getElementById('btnInfoHotel').addEventListener('click', ()=&gt;{
+              if (!hotel) return;
+              alert(hotel.info());
+            });
+            
+            document.getElementById('btnReservar').addEventListener('click', ()=&gt;{
+              if (!hotel) return;
+              hotel.reservar(Number(document.getElementById('h-cant').value));
+              mostrarHotel();
+            });
+            
+            document.getElementById('btnLiberar').addEventListener('click', ()=&gt;{
+              if (!hotel) return;
+              hotel.liberar(Number(document.getElementById('h-cant').value));
+              mostrarHotel();
+            });
+            
+            function mostrarHotel(){
+              if (!hotel){
+                document.getElementById('hotelOutput').innerText = 'Estado: —';
+                return;
+              }
+              document.getElementById('hotelOutput').innerText = hotel.info();
+            }
+            
+            /////////////////////// GENERACIÓN PDF ///////////////////////
+            
+            document.getElementById('btnPrint').addEventListener('click', ()=&gt;{
+              window.print();
+            });
+            
+            &lt;/script&gt;
+            
+            &lt;/body&gt;
+            &lt;/html&gt;
+        "></iframe>
+    </div>
+
+    <div id="css" class="section">
+        <iframe srcdoc="
+            &lt;!doctype html&gt;
+            &lt;html lang='es'&gt;
+            &lt;head&gt;
+            &lt;meta charset='utf-8'&gt;
+            &lt;meta name='viewport' content='width=device-width,initial-scale=1'&gt;
+            &lt;title&gt;Página creativa - Fondo, fuente personalizada&lt;/title&gt;
+
+            &lt;!-- Fuentes personalizadas (Google Fonts) --&gt;
+            &lt;link rel='preconnect' href='https://fonts.gstatic.com' crossorigin&gt;
+            &lt;link href='https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&amp;family=Roboto+Slab:wght@300;400&amp;display=swap' rel='stylesheet'&gt;
+
+            &lt;style&gt;
+              /* Variables de color */
+              :root{
+                --bg-accent-1: rgba(58,123,213,0.90);
+                --bg-accent-2: rgba(123,58,213,0.85);
+                --card-bg: rgba(255,255,255,0.9);
+                --text-main: #0f1724;
+                --muted: #475569;
+                --radius: 14px;
+                --max-width: 980px;
+                --pattern-fill: rgba(255,255,255,0.03);
+              }
+
+              /* Reset sencillo y accesibilidad */
+              *,*::before,*::after{box-sizing:border-box}
+              html,body{height:100%}
+              body{
+                margin:0;
+                font-family: 'Roboto Slab', serif;
+                color:var(--text-main);
+                -webkit-font-smoothing:antialiased;
+                -moz-osx-font-smoothing:grayscale;
+                line-height:1.45;
+                background-color:#0b1020;
+              }
+
+              /* Fondo creativo con 3 capas */
+              .bg-layer{
+                min-height:100vh;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:48px 24px;
+                background-image:
+                  /* Patrón hecho con SVG embebido como data URI */
+                  url('data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'&gt;&lt;g fill=\'none\' fill-rule=\'evenodd\'&gt;&lt;rect width=\'40\' height=\'40\' fill=\'none\'/&gt;&lt;path d=\'M20 0v40M0 20h40\' stroke=\'%23ffffff\' stroke-opacity=\'0.03\' stroke-width=\'1\'/&gt;&lt;/g&gt;&lt;/svg&gt;'),
+                  /* Imagen de Unsplash (auto-crop) */
+                  url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&amp;fit=crop&amp;w=1600&amp;q=60'),
+                  linear-gradient(135deg,var(--bg-accent-1),var(--bg-accent-2));
+                background-size: 40px 40px, cover, cover;
+                background-position: center center, center center, center center;
+                background-blend-mode: overlay, normal, normal;
+              }
+
+              /* Contenedor de contenido */
+              .card{
+                width:100%;
+                max-width:var(--max-width);
+                background:var(--card-bg);
+                border-radius:var(--radius);
+                box-shadow: 0 10px 30px rgba(2,6,23,0.45);
+                padding:32px;
+                backdrop-filter: blur(6px) saturate(120%);
+                border: 1px solid rgba(255,255,255,0.06);
+              }
+
+              header{
+                display:flex;
+                gap:20px;
+                align-items:center;
+                margin-bottom:18px;
+              }
+
+              .logo{
+                width:68px;height:68px;
+                border-radius:12px;
+                display:grid;place-items:center;
+                background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+                font-family: 'Poppins', sans-serif;
+                font-weight:800;
+                color:white;
+                box-shadow: 0 6px 18px rgba(2,6,23,0.45) inset;
+              }
+
+              h1{
+                margin:0;
+                font-family: 'Poppins', sans-serif;
+                font-size: clamp(1.6rem, 2.4vw, 2.6rem);
+                line-height:1.05;
+                color: #051027;
+                letter-spacing:-0.5px;
+              }
+
+              p.lead{
+                margin:8px 0 0 0;
+                color:var(--muted);
+                font-size:1rem;
+              }
+
+              .grid{
+                display:grid;
+                grid-template-columns: 1fr 320px;
+                gap:20px;
+                align-items:start;
+                margin-top:20px;
+              }
+
+              /* Lista de enlaces de interés */
+              .links{
+                background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.48));
+                padding:16px;
+                border-radius:10px;
+                border:1px solid rgba(2,6,23,0.05);
+              }
+
+              .links h3{margin:0 0 8px 0;font-size:1.05rem}
+              .links ul{margin:0;padding:0;list-style:none}
+              .links li{margin:10px 0}
+              .links a{color:#0f1724;text-decoration:none;display:inline-block}
+              .links a:focus,.links a:hover{text-decoration:underline}
+
+              /* Tarjeta principal (contenido) */
+              .content{padding:12px 8px}
+              .content h2{font-family:'Poppins',sans-serif;margin-top:0}
+              .content p{margin:0 0 12px 0}
+
+              /* Pequeños detalles responsivos */
+              @media (max-width:880px){
+                .grid{grid-template-columns:1fr;}
+                .links{order:2}
+              }
+
+              /* Botón ejemplo */
+              .btn{
+                display:inline-block;
+                padding:10px 16px;
+                border-radius:10px;
+                text-decoration:none;
+                background: linear-gradient(90deg, #1e7be6, #7a3bd5);
+                color:white;font-weight:600;
+                box-shadow: 0 8px 20px rgba(124,58,237,0.18);
+              }
+
+              footer{margin-top:18px;font-size:0.875rem;color:var(--muted)}
+            &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;main class='bg-layer'&gt;
+                &lt;article class='card' role='main'&gt;
+                    &lt;header&gt;
+                        &lt;div class='logo' aria-hidden='true'&gt;VC&lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h1&gt;Valencia Figueredo Daniel&lt;/h1&gt;
+                            &lt;p class='lead'&gt;Esta es mi presentación para el foro.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/header&gt;
+
+                    &lt;section class='grid'&gt;
+                        &lt;div class='content'&gt;
+                            &lt;h2&gt;Qué incluye esta página&lt;/h2&gt;
+                            &lt;p&gt;Esta página demuestra varias técnicas combinadas en una sola hoja: un &lt;strong&gt;gradient&lt;/strong&gt;, una &lt;strong&gt;imagen&lt;/strong&gt; de fondo (Unsplash) y un &lt;strong&gt;patrón&lt;/strong&gt; SVG embebido como data URI. Las fuentes se cargan desde Google Fonts y el CSS está pensado para pasar validación (estructura y propiedades estándar).&lt;/p&gt;
+
+                            &lt;h2&gt;Notas de implementación&lt;/h2&gt;
+                            &lt;ul&gt;
+                                &lt;li&gt;Patrón SVG: se incluye como &lt;code&gt;background-image&lt;/code&gt; con un tamaño pequeño para crear un 'pattern' sutil.&lt;/li&gt;
+                                &lt;li&gt;Imagen: se usa una imagen pública de Unsplash con parámetros para reducir tamaño (servicio libre para demostración).&lt;/li&gt;
+                                &lt;li&gt;Accesibilidad: alto contraste en textos principales, tamaño de letra escalable.&lt;/li&gt;
+                                &lt;li&gt;Validación: evita propiedades prefijadas ni reglas no estándar para facilitar validadores CSS/HTML.&lt;/li&gt;
+                            &lt;/ul&gt;
+
+                            &lt;p&gt;&lt;a class='btn' href='\#links'&gt;Ver enlaces de interés&lt;/a&gt;&lt;/p&gt;
+
+                            &lt;footer&gt;
+                                Creado como &lt;strong&gt;index.html&lt;/strong&gt; — puedes copiar y pegar este archivo en tu proyecto.
+                            &lt;/footer&gt;
+                        &lt;/div&gt;
+
+                        &lt;aside class='links' id='links' aria-labelledby='links-title'&gt;
+                            &lt;h3 id='links-title'&gt;Enlaces de interés CSS&lt;/h3&gt;
+                            &lt;ul&gt;
+                                &lt;li&gt;&lt;a href='https://fonts.google.com/' target='_blank' rel='noopener'&gt;https://fonts.google.com/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://www.htmlcsscolor.com/' target='_blank' rel='noopener'&gt;https://www.htmlcsscolor.com/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://www.google.com/search?q=color+picker' target='_blank' rel='noopener'&gt;https://www.google.com/search?q=color+picker&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://coolors.co/' target='_blank' rel='noopener'&gt;https://coolors.co/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://unsplash.com/es' target='_blank' rel='noopener'&gt;https://unsplash.com/es&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://www.magicpattern.design/tools/css-backgrounds' target='_blank' rel='noopener'&gt;https://www.magicpattern.design/tools/css-backgrounds&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://heropatterns.com/' target='_blank' rel='noopener'&gt;https://heropatterns.com/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://uigradients.com/' target='_blank' rel='noopener'&gt;https://uigradients.com/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://cssgradient.io/' target='_blank' rel='noopener'&gt;https://cssgradient.io/&lt;/a&gt;&lt;/li&gt;
+                                &lt;li&gt;&lt;a href='https://getcssscan.com/css-box-shadow-examples' target='_blank' rel='noopener'&gt;https://getcssscan.com/css-box-shadow-examples&lt;/a&gt;&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/aside&gt;
+                    &lt;/section&gt;
+                &lt;/article&gt;
+            &lt;/main&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        "></iframe>
+    </div>
+
+    <div id="proyecto" class="section">
+        <iframe srcdoc="
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang='es'&gt;
+            &lt;head&gt;
+                &lt;meta charset='UTF-8'&gt;
+                &lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;
+                &lt;title&gt;Turismo en Santa Cruz - Descubre la Joya de Oriente&lt;/title&gt;
+                &lt;style&gt;
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    header {
+                        background: linear-gradient(135deg, #2c5530 0%, #4a7c4e 100%);
+                        color: white;
+                        padding: 1rem 0;
+                        position: fixed;
+                        width: 100%;
+                        top: 0;
+                        z-index: 1000;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    }
+                    nav {
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 0 2rem;
+                    }
+                    .logo {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                    }
+                    .nav-links {
+                        display: flex;
+                        list-style: none;
+                        gap: 2rem;
+                    }
+                    .nav-links a {
+                        color: white;
+                        text-decoration: none;
+                        transition: color 0.3s;
+                        font-weight: 500;
+                    }
+                    .nav-links a:hover {
+                        color: #f4a460;
+                    }
+                    .menu-toggle {
+                        display: none;
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                    }
+                    /* Hero Section */
+                    .hero {
+                        margin-top: 70px;
+                        height: 600px;
+                        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 600\'&gt;&lt;rect fill=\'%234a7c4e\' width=\'1200\' height=\'600\'/&gt;&lt;path fill=\'%233d6640\' d=\'M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z\'/&gt;&lt;circle fill=\'%23f4a460\' cx=\'200\' cy=\'150\' r=\'60\' opacity=\'0.3\'/&gt;&lt;circle fill=\'%23f4a460\' cx=\'900\' cy=\'200\' r=\'80\' opacity=\'0.2\'/&gt;&lt;/svg&gt;');
+                        background-size: cover;
+                        background-position: center;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        color: white;
+                    }
+                    .hero-content h1 {
+                        font-size: 3.5rem;
+                        margin-bottom: 1rem;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                    }
+                    .hero-content p {
+                        font-size: 1.3rem;
+                        margin-bottom: 2rem;
+                        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+                    }
+                    .cta-button {
+                        display: inline-block;
+                        padding: 1rem 2.5rem;
+                        background: #f4a460;
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 50px;
+                        font-weight: bold;
+                        transition: transform 0.3s, background 0.3s;
+                    }
+                    .cta-button:hover {
+                        transform: translateY(-3px);
+                        background: #e8944d;
+                    }
+                    /* Secciones */
+                    section {
+                        padding: 4rem 2rem;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                    }
+                    h2 {
+                        font-size: 2.5rem;
+                        margin-bottom: 2rem;
+                        color: #2c5530;
+                        text-align: center;
+                    }
+                    /* Ubicación */
+                    .ubicacion-content {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 3rem;
+                        align-items: center;
+                    }
+                    .mapa-placeholder {
+                        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+                        height: 400px;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.2rem;
+                        color: #2c5530;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    }
+                    .info-box {
+                        background: #f9f9f9;
+                        padding: 2rem;
+                        border-radius: 10px;
+                        border-left: 4px solid #4a7c4e;
+                    }
+                    .info-box h3 {
+                        color: #2c5530;
+                        margin-bottom: 1rem;
+                    }
+                    .info-box ul {
+                        list-style: none;
+                        padding-left: 0;
+                    }
+                    .info-box li {
+                        padding: 0.5rem 0;
+                        border-bottom: 1px solid #e0e0e0;
+                    }
+                    .info-box li:last-child {
+                        border-bottom: none;
+                    }
+                    /* Destinos */
+                    .destinos-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 2rem;
+                        margin-top: 2rem;
+                    }
+                    .destino-card {
+                        background: white;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                        transition: transform 0.3s;
+                    }
+                    .destino-card:hover {
+                        transform: translateY(-10px);
+                    }
+                    .destino-img {
+                        height: 200px;
+                        background: linear-gradient(135deg, #4a7c4e 0%, #6b9b6e 100%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                    }
+                    .destino-content {
+                        padding: 1.5rem;
+                    }
+                    .destino-content h3 {
+                        color: #2c5530;
+                        margin-bottom: 0.5rem;
+                    }
+                    /* Gastronomía */
+                    .gastronomia-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 2rem;
+                        margin-top: 2rem;
+                    }
+                    .plato-card {
+                        background: white;
+                        border-radius: 10px;
+                        padding: 1.5rem;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                        text-align: center;
+                    }
+                    .plato-icon {
+                        width: 100px;
+                        height: 100px;
+                        background: linear-gradient(135deg, #f4a460 0%, #e8944d 100%);
+                        border-radius: 50%;
+                        margin: 0 auto 1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 2rem;
+                        color: white;
+                    }
+                    .plato-card h3 {
+                        color: #2c5530;
+                        margin-bottom: 0.5rem;
+                    }
+                    /* Historia */
+                    .historia-content {
+                        background: linear-gradient(135deg, #f9f9f9 0%, #e8f5e9 100%);
+                        padding: 3rem;
+                        border-radius: 10px;
+                        border-left: 5px solid #4a7c4e;
+                    }
+                    .timeline {
+                        margin-top: 2rem;
+                    }
+                    .timeline-item {
+                        margin-bottom: 2rem;
+                        padding-left: 2rem;
+                        border-left: 3px solid #f4a460;
+                    }
+                    .timeline-item h3 {
+                        color: #2c5530;
+                        margin-bottom: 0.5rem;
+                    }
+                    /* Contacto */
+                    .contacto-content {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 3rem;
+                    }
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                    }
+                    input, textarea {
+                        padding: 1rem;
+                        border: 2px solid #e0e0e0;
+                        border-radius: 5px;
+                        font-family: inherit;
+                        transition: border-color 0.3s;
+                    }
+                    input:focus, textarea:focus {
+                        outline: none;
+                        border-color: #4a7c4e;
+                    }
+                    textarea {
+                        min-height: 150px;
+                        resize: vertical;
+                    }
+                    button[type='submit'] {
+                        padding: 1rem;
+                        background: #4a7c4e;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: background 0.3s;
+                    }
+                    button[type='submit']:hover {
+                        background: #3d6640;
+                    }
+                    .info-contacto {
+                        background: #f9f9f9;
+                        padding: 2rem;
+                        border-radius: 10px;
+                    }
+                    .info-contacto h3 {
+                        color: #2c5530;
+                        margin-bottom: 1rem;
+                    }
+                    .contacto-item {
+                        margin-bottom: 1.5rem;
+                        padding: 1rem;
+                        background: white;
+                        border-radius: 5px;
+                    }
+                    /* Footer */
+                    footer {
+                        background: #2c5530;
+                        color: white;
+                        text-align: center;
+                        padding: 2rem;
+                        margin-top: 3rem;
+                    }
+                    /* Responsive */
+                    @media (max-width: 768px) {
+                        .menu-toggle {
+                            display: block;
+                        }
+                        .nav-links {
+                            display: none;
+                            position: absolute;
+                            top: 100%;
+                            left: 0;
+                            right: 0;
+                            background: #2c5530;
+                            flex-direction: column;
+                            padding: 1rem;
+                            gap: 0;
+                        }
+                        .nav-links.active {
+                            display: flex;
+                        }
+                        .nav-links li {
+                            padding: 1rem 0;
+                            border-bottom: 1px solid rgba(255,255,255,0.1);
+                        }
+                        .hero-content h1 {
+                            font-size: 2rem;
+                        }
+                        .hero-content p {
+                            font-size: 1rem;
+                        }
+                        .ubicacion-content,
+                        .contacto-content {
+                            grid-template-columns: 1fr;
+                        }
+                        h2 {
+                            font-size: 2rem;
+                        }
+                    }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;header&gt;
+                    &lt;nav&gt;
+                        &lt;div class='logo'&gt;Santa Cruz Turismo&lt;/div&gt;
+                        &lt;button class='menu-toggle' onclick='toggleMenu()'&gt;☰&lt;/button&gt;
+                        &lt;ul class='nav-links' id='navLinks'&gt;
+                            &lt;li&gt;&lt;a href='\#inicio'&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href='\#ubicacion'&gt;Ubicación&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href='\#destinos'&gt;Destinos&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href='\#gastronomia'&gt;Gastronomía&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href='\#historia'&gt;Historia&lt;/a&gt;&lt;/li&gt;
+                            &lt;li&gt;&lt;a href='\#contacto'&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/nav&gt;
+                &lt;/header&gt;
+
+                &lt;section id='inicio' class='hero'&gt;
+                    &lt;div class='hero-content'&gt;
+                        &lt;h1&gt;Descubre Santa Cruz&lt;/h1&gt;
+                        &lt;p&gt;La joya del oriente boliviano te espera con sus paisajes naturales, cultura vibrante y hospitalidad sin igual&lt;/p&gt;
+                        &lt;a href='\#destinos' class='cta-button'&gt;Explorar Destinos&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;section id='ubicacion'&gt;
+                    &lt;h2&gt;Ubicación y Acceso&lt;/h2&gt;
+                    &lt;div class='ubicacion-content'&gt;
+                        &lt;div class='info-box'&gt;
+                            &lt;h3&gt;Cómo Llegar&lt;/h3&gt;
+                            &lt;ul&gt;
+                                &lt;li&gt;&lt;strong&gt;Aeropuerto:&lt;/strong&gt; Viru Viru Internacional (VVI)&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Vuelos:&lt;/strong&gt; Conexiones nacionales e internacionales diarias&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Terminal Terrestre:&lt;/strong&gt; Bimodal de Santa Cruz&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Carreteras:&lt;/strong&gt; Red vial conectada con todo el país&lt;/li&gt;
+                            &lt;/ul&gt;
+                            &lt;br&gt;
+                            &lt;h3&gt;Datos Importantes&lt;/h3&gt;
+                            &lt;ul&gt;
+                                &lt;li&gt;&lt;strong&gt;Altitud:&lt;/strong&gt; 416 m.s.n.m.&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Clima:&lt;/strong&gt; Tropical cálido y húmedo&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Temperatura:&lt;/strong&gt; 18°C - 33°C promedio&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Población:&lt;/strong&gt; Más de 2 millones de habitantes&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                        &lt;div class='mapa-placeholder'&gt;
+                            Mapa Interactivo de Santa Cruz&lt;br&gt;
+                            &lt;small&gt;Integración con Google Maps&lt;/small&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;section id='destinos'&gt;
+                    &lt;h2&gt;Lugares Turísticos&lt;/h2&gt;
+                    &lt;div class='destinos-grid'&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Parque Amboró&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;Parque Nacional Amboró&lt;/h3&gt;
+                                &lt;p&gt;Una de las áreas protegidas con mayor biodiversidad del planeta. Hogar de cientos de especies de aves, mamíferos y plantas endémicas.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Lomas de Arena&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;Lomas de Arena&lt;/h3&gt;
+                                &lt;p&gt;Dunas de arena blanca en medio del trópico. Un fenómeno natural único perfecto para sandboard y caminatas.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Misiones Jesuíticas&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;Misiones Jesuíticas&lt;/h3&gt;
+                                &lt;p&gt;Patrimonio de la Humanidad UNESCO. Templos coloniales con arquitectura barroca mestiza y festivales de música renacentista.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Samaipata&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;El Fuerte de Samaipata&lt;/h3&gt;
+                                &lt;p&gt;Centro ceremonial precolombino tallado en roca. Patrimonio Cultural de la Humanidad con vistas espectaculares.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Plaza 24 de Septiembre&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;Plaza 24 de Septiembre&lt;/h3&gt;
+                                &lt;p&gt;Corazón histórico de la ciudad. Rodeada de la Catedral Metropolitana, edificios coloniales y vida urbana vibrante.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class='destino-card'&gt;
+                            &lt;div class='destino-img'&gt;Biocentro Güembé&lt;/div&gt;
+                            &lt;div class='destino-content'&gt;
+                                &lt;h3&gt;Biocentro Güembé&lt;/h3&gt;
+                                &lt;p&gt;Resort ecológico con mariposario, orquideario, piscinas naturales y senderos en plena naturaleza tropical.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;section id='gastronomia'&gt;
+                    &lt;h2&gt;Gastronomía Típica&lt;/h2&gt;
+                    &lt;p style='text-align: center; max-width: 800px; margin: 0 auto 2rem;'&gt;La cocina cruceña es una fusión de sabores tradicionales con influencias de las culturas guaraní, chiquitana y española. Platos abundantes que reflejan la calidez de su gente.&lt;/p&gt;
+                    &lt;div class='gastronomia-grid'&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;M&lt;/div&gt;
+                            &lt;h3&gt;Majadito&lt;/h3&gt;
+                            &lt;p&gt;Arroz con charque, plátano frito, yuca y huevo. El plato emblemático de Santa Cruz.&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;P&lt;/div&gt;
+                            &lt;h3&gt;Patasca&lt;/h3&gt;
+                            &lt;p&gt;Sopa tradicional de maíz pelado con carne de cerdo. Ideal para días frescos.&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;S&lt;/div&gt;
+                            &lt;h3&gt;Sopa de Maní&lt;/h3&gt;
+                            &lt;p&gt;Cremosa sopa a base de maní molido con carne y verduras. Sabor único e inconfundible.&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;C&lt;/div&gt;
+                            &lt;h3&gt;Cuñapé&lt;/h3&gt;
+                            &lt;p&gt;Pan de queso tradicional de la región. Perfecto para el desayuno o la merienda.&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;L&lt;/div&gt;
+                            &lt;h3&gt;Locro Carretero&lt;/h3&gt;
+                            &lt;p&gt;Guiso espeso de arroz, charque y queso. Plato contundente lleno de tradición.&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class='plato-card'&gt;
+                            &lt;div class='plato-icon'&gt;E&lt;/div&gt;
+                            &lt;h3&gt;Empanadas Cruceñas&lt;/h3&gt;
+                            &lt;p&gt;Empanadas de queso con azúcar espolvoreada. Dulces y saladas a la vez.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;section id='historia'&gt;
+                    &lt;h2&gt;Historia y Cultura&lt;/h2&gt;
+                    &lt;div class='historia-content'&gt;
+                        &lt;p&gt;Santa Cruz de la Sierra es una de las ciudades más antiguas de América del Sur, fundada en el siglo XVI. Su historia está marcada por la mezcla de culturas indígenas, la presencia jesuítica y el espíritu emprendedor de su gente.&lt;/p&gt;
+                        
+                        &lt;div class='timeline'&gt;
+                            &lt;div class='timeline-item'&gt;
+                                &lt;h3&gt;1561 - Fundación&lt;/h3&gt;
+                                &lt;p&gt;Ñuflo de Chaves funda la ciudad de Santa Cruz de la Sierra en su ubicación original, en la región de San José de Chiquitos.&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class='timeline-item'&gt;
+                                &lt;h3&gt;1592 - Traslado&lt;/h3&gt;
+                                &lt;p&gt;La ciudad es trasladada a su ubicación actual a orillas del río Piraí, buscando mejores condiciones geográficas.&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class='timeline-item'&gt;
+                                &lt;h3&gt;Siglo XVII-XVIII - Misiones Jesuíticas&lt;/h3&gt;
+                                &lt;p&gt;Establecimiento de las reducciones jesuíticas que dejaron un legado arquitectónico y cultural invaluable en la región de Chiquitania.&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class='timeline-item'&gt;
+                                &lt;h3&gt;Siglo XX - Expansión&lt;/h3&gt;
+                                &lt;p&gt;Santa Cruz experimenta un crecimiento acelerado, convirtiéndose en el motor económico de Bolivia gracias a la agricultura, ganadería e industria.&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div class='timeline-item'&gt;
+                                &lt;h3&gt;Actualidad&lt;/h3&gt;
+                                &lt;p&gt;Hoy es la ciudad más poblada de Bolivia, centro comercial, cultural y turístico de importancia nacional e internacional.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                        &lt;h3 style='margin-top: 2rem; color: #2c5530;'&gt;Cultura Cruceña&lt;/h3&gt;
+                        &lt;p style='margin-top: 1rem;'&gt;La cultura cruceña se caracteriza por su hospitalidad, música tradicional (taquirari, chovena), festividades coloridas como el Carnaval Cruceño, y la preservación de tradiciones como el uso de la tipoy (vestimenta tradicional femenina). La identidad regional se expresa en su gastronomía, folklore y sentido de comunidad.&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;section id='contacto'&gt;
+                    &lt;h2&gt;Contacto&lt;/h2&gt;
+                    &lt;div class='contacto-content'&gt;
+                        &lt;form onsubmit='handleSubmit(event)'&gt;
+                            &lt;input type='text' placeholder='Nombre completo' required&gt;
+                            &lt;input type='email' placeholder='Correo electrónico' required&gt;
+                            &lt;input type='tel' placeholder='Teléfono'&gt;
+                            &lt;textarea placeholder='Mensaje o consulta' required&gt;&lt;/textarea&gt;
+                            &lt;button type='submit'&gt;Enviar Mensaje&lt;/button&gt;
+                        &lt;/form&gt;
+                        &lt;div class='info-contacto'&gt;
+                            &lt;h3&gt;Información de Contacto&lt;/h3&gt;
+                            &lt;div class='contacto-item'&gt;
+                                &lt;strong&gt;Dirección:&lt;/strong&gt;&lt;br&gt;
+                                Plaza 24 de Septiembre&lt;br&gt;
+                                Santa Cruz de la Sierra, Bolivia
+                            &lt;/div&gt;
+                            &lt;div class='contacto-item'&gt;
+                                &lt;strong&gt;Teléfono:&lt;/strong&gt;&lt;br&gt;
+                                +591 3 123 4567
+                            &lt;/div&gt;
+                            &lt;div class='contacto-item'&gt;
+                                &lt;strong&gt;Email:&lt;/strong&gt;&lt;br&gt;
+                                info@turismocruz.bo
+                            &lt;/div&gt;
+                            &lt;div class='contacto-item'&gt;
+                                &lt;strong&gt;Horario de Atención:&lt;/strong&gt;&lt;br&gt;
+                                Lunes a Viernes: 8:00 - 18:00&lt;br&gt;
+                                Sábados: 9:00 - 13:00
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+                &lt;footer&gt;
+                    &lt;p&gt;&amp;copy; 2024 Turismo Santa Cruz - Bolivia. Todos los derechos reservados.&lt;/p&gt;
+                    &lt;p&gt;Descubre la belleza natural y cultural del oriente boliviano&lt;/p&gt;
+                &lt;/footer&gt;
+
+                &lt;script&gt;
+                    function toggleMenu() {
+                        const navLinks = document.getElementById('navLinks');
+                        navLinks.classList.toggle('active');
+                    }
+
+                    function handleSubmit(event) {
+                        event.preventDefault();
+                        alert('Gracias por tu mensaje. Te contactaremos pronto.');
+                        event.target.reset();
+                    }
+
+                    // Smooth scroll
+                    document.querySelectorAll('a[href^=\'#\']').forEach(anchor =&gt; {
+                        anchor.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                                // Cerrar menú móvil si está abierto
+                                document.getElementById('navLinks').classList.remove('active');
+                            }
+                        });
+                    });
+                &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        "></iframe>
+    </div>
+
+    <footer>
+        Sistema integrado – Portafolio Académico
+    </footer>
+
 </body>
 </html>
