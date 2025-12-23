@@ -1,0 +1,27 @@
+[
+  {
+    "nombre": "Plaza 24 de Septiembre",
+    "descripcion": "Centro histórico de Santa Cruz, rodeado de arquitectura colonial y cultural.",
+    "imagen": "img/plaza24.jpg"
+  },
+  {
+    "nombre": "Samaipata",
+    "descripcion": "Pueblo turístico con ruinas arqueológicas y paisajes naturales.",
+    "imagen": "img/samaipata.jpg"
+  },
+  {
+    "nombre": "Parque Nacional Amboró",
+    "descripcion": "Área protegida con una de las mayores biodiversidades del país.",
+    "imagen": "img/amboro.jpg"
+  },
+  {
+    "nombre": "Biocentro Güembé",
+    "descripcion": "Complejo turístico con mariposario y piscinas naturales.",
+    "imagen": "img/guembe.jpg"
+  },
+  {
+    "nombre": "Lomas de Arena",
+    "descripcion": "Área protegida con dunas y lagunas naturales.",
+    "imagen": "img/lomas.jpg"
+  }
+]
