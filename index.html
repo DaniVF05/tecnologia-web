@@ -1,28 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web de Tecnología</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding-top: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-            font-size: 1.2em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Turismo en Santa Cruz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>¡Bienvenido a mi Práctica de Tecnología Web I!</h1>
-    <p>Este es mi primer sitio web publicado usando GitHub Pages.</p>
-    <p>El repositorio está clonado correctamente en VS Code y listo para la práctica.</p>
+
+<header class="header">
+  <img src="img/logo.jpg" alt="Logo Santa Cruz" class="logo">
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#destinos">Destinos</a>
+    <a href="#reservas">Reservas</a>
+    <a href="#gastronomia">Gastronomía</a>
+    <a href="#clima">Clima</a>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <h1>Santa Cruz de la Sierra</h1>
+  <p>Cultura, tradición y naturaleza</p>
+</section>
+
+<section id="destinos" class="section container">
+  <h2>Destinos Turísticos</h2>
+  <div class="carousel">
+    <div id="carousel-track" class="carousel-track"></div>
+  </div>
+</section>
+
+<section id="reservas" class="section container">
+  <h2>Reservas y Experiencias</h2>
+  <div class="carousel">
+    <div id="reservas-track" class="carousel-track"></div>
+  </div>
+</section>
+
+<section id="gastronomia" class="section container">
+  <h2>Gastronomía Cruceña</h2>
+  <div class="food-grid">
+    <div class="food-card">
+      <img src="img/majadito.jpg" alt="Majadito">
+      <h3>Majadito</h3>
+      <p>Arroz con charque o pollo, acompañado de plátano y huevo.</p>
+    </div>
+    <div class="food-card">
+      <img src="img/sonso.jpg" alt="Sonso">
+      <h3>Sonso</h3>
+      <p>Yuca machacada con queso, típica del oriente boliviano.</p>
+    </div>
+    <div class="food-card">
+      <img src="img/locro.jpg" alt="Locro">
+      <h3>Locro</h3>
+      <p>Sopa tradicional con arroz, carne y verduras.</p>
+    </div>
+    <div class="food-card">
+      <img src="img/keperi.jpg" alt="Keperí">
+      <h3>Keperí</h3>
+      <p>Carne de cerdo asada, muy popular en Santa Cruz.</p>
+    </div>
+    <div class="food-card">
+      <img src="img/masaco.jpg" alt="Masaco">
+      <h3>Masaco</h3>
+      <p>Preparación de yuca o plátano con charque.</p>
+    </div>
+  </div>
+</section>
+
+<section id="clima" class="section container">
+  <h2>Clima Actual</h2>
+  <p id="clima-texto">Cargando clima...</p>
+</section>
+
+<footer class="footer">
+  <p>Proyecto Tecnología Web – Santa Cruz de la Sierra</p>
+</footer>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal">&times;</span>
+    <img id="modal-img" alt="">
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <p><strong>Tipo:</strong> <span id="modal-tipo"></span></p>
+    <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
+  </div>
+</div>
+
+<script src="js/turismo-json.js"></script>
+<script src="js/api-clima.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

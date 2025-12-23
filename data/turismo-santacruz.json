@@ -1,27 +1,54 @@
-[
-  {
-    "nombre": "Plaza 24 de Septiembre",
-    "descripcion": "Centro histórico de Santa Cruz, rodeado de arquitectura colonial y cultural.",
-    "imagen": "img/plaza24.jpg"
-  },
-  {
-    "nombre": "Samaipata",
-    "descripcion": "Pueblo turístico con ruinas arqueológicas y paisajes naturales.",
-    "imagen": "img/samaipata.jpg"
-  },
-  {
-    "nombre": "Parque Nacional Amboró",
-    "descripcion": "Área protegida con una de las mayores biodiversidades del país.",
-    "imagen": "img/amboro.jpg"
-  },
-  {
-    "nombre": "Biocentro Güembé",
-    "descripcion": "Complejo turístico con mariposario y piscinas naturales.",
-    "imagen": "img/guembe.jpg"
-  },
-  {
-    "nombre": "Lomas de Arena",
-    "descripcion": "Área protegida con dunas y lagunas naturales.",
-    "imagen": "img/lomas.jpg"
-  }
-]
+{
+  "destinos": [
+    {
+      "nombre": "Plaza 24 de Septiembre",
+      "descripcionCorta": "Centro histórico de la ciudad.",
+      "descripcionLarga": "Es el corazón cultural y social de Santa Cruz.",
+      "imagen": "img/plaza24.jpg",
+      "tipo": "Cultural",
+      "ubicacion": "Centro"
+    },
+    {
+      "nombre": "Samaipata",
+      "descripcionCorta": "Destino natural y cultural.",
+      "descripcionLarga": "Clima templado, historia y paisajes únicos.",
+      "imagen": "img/samaipata.jpg",
+      "tipo": "Histórico",
+      "ubicacion": "Provincia Florida"
+    },
+    {
+      "nombre": "Parque Amboró",
+      "descripcionCorta": "Reserva natural.",
+      "descripcionLarga": "Uno de los parques más biodiversos del país.",
+      "imagen": "img/amboro.jpg",
+      "tipo": "Natural",
+      "ubicacion": "Oeste de Santa Cruz"
+    }
+  ],
+  "reservas": [
+    {
+      "nombre": "Hotel Urbano",
+      "descripcionCorta": "Alojamiento moderno.",
+      "descripcionLarga": "Hotel céntrico con todas las comodidades.",
+      "imagen": "img/plaza24.jpg",
+      "tipo": "Hotel",
+      "ubicacion": "Centro"
+    },
+    {
+      "nombre": "Eco Lodge Amboró",
+      "descripcionCorta": "Hospedaje ecológico.",
+      "descripcionLarga": "Ideal para turismo sostenible.",
+      "imagen": "img/amboro.jpg",
+      "tipo": "Ecológico",
+      "ubicacion": "Amboró"
+    },
+    {
+      "nombre": "Tour Samaipata",
+      "descripcionCorta": "Viaje guiado.",
+      "descripcionLarga": "Incluye visitas culturales y naturales.",
+      "imagen": "img/samaipata.jpg",
+      "tipo": "Tour",
+      "ubicacion": "Samaipata"
+    }
+  ]
+}
